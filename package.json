@@ -1,0 +1,32 @@
+{
+  "name": "travel_app",
+  "version": "1.0.0",
+  "description": "This app let's you plan your trip by giving the weather info and details about the place",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "dev": "webpack-dev-server  --config webpack.dev.js --open",
+    "prod": "webpack --config webpack.prod.js",
+    "start": "node ./src/Server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "yes"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "html-webpack-plugin": "^4.3.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "terser-webpack-plugin": "^3.0.6",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "clean-webpack-plugin": "^3.0.0",
+    "webpack-dev-server": "^3.11.0"
+  }
+}

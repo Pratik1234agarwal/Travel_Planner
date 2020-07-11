@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "dev": "webpack-dev-server  --config webpack.dev.js --open",
+    "dev": "webpack-dev-server  --config webpack.dev.js",
     "prod": "webpack --config webpack.prod.js",
     "start": "node src/Server/index.js"
   },
@@ -21,6 +21,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "html-webpack-plugin": "^4.3.0",
+    "materialize-css": "^1.0.0-rc.2",
     "mini-css-extract-plugin": "^0.9.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "terser-webpack-plugin": "^3.0.6",
@@ -32,6 +33,9 @@
     "@babel/core": "^7.10.4",
     "@babel/preset-env": "^7.10.4",
     "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.6.0",
+    "sass-loader": "^9.0.2",
+    "style-loader": "^1.2.1",
     "webpack-dev-server": "^3.11.0"
   },
   "engines": {

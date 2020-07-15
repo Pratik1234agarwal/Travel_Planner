@@ -6,6 +6,12 @@ import Resort2 from './img/resort2.jpg';
 import Resort3 from './img/resort3.jpg';
 import html from './views/index.html';
 
+//post the server uses
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 8000;
+}
+
 
 //sidenav 
 
@@ -47,7 +53,7 @@ const button = document.querySelector(".btn");
 button.addEventListener('click',async()=>{
     const input = document.querySelector('input');
     const data = {city:input.value};
-    const apiData = await postData("http://localhost:8000/fetch",data);
+    const apiData = await postData(`http://localhost:${port}/fetch`,data);
     console.log(apiData);
     setImages(apiData.images);
     const text = document.querySelector("#trip_destination");

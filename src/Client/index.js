@@ -53,7 +53,7 @@ const button = document.querySelector(".btn");
 button.addEventListener('click',async()=>{
     const input = document.querySelector('input');
     const data = {city:input.value};
-    const apiData = await postData(`http://localhost:${port}/fetch`,data);
+    const apiData = await postData("/fetch",data);
     console.log(apiData);
     setImages(apiData.images);
     const text = document.querySelector("#trip_destination");

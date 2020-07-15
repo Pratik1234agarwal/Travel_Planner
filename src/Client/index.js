@@ -21,7 +21,7 @@ M.Slider.init(sidenav,{
 const modal = document.querySelectorAll('.modal');
 M.Modal.init(modal,{
     dismissible:false,
-    onOpenEnd : carouselInit
+    //onOpenEnd : carouselInit
 });
 
 // Datepicker 
@@ -50,8 +50,15 @@ button.addEventListener('click',async()=>{
     const apiData = await postData("http://localhost:8000/fetch",data);
     console.log(apiData);
     setImages(apiData.images);
-    const text = document.querySelector("#Image-text");
-    text.innerHTML = `${apiData.cityName},${apiData.countryName}`;
+    const text = document.querySelector("#trip_destination");
+    text.innerHTML = `Trip to ${apiData.cityName},${apiData.countryName}`;
+    const risk = document.querySelector('#risk-score');
+    risk.innerHTML = `Risk Score : ${apiData.riskScore} / 5`;
+
+    document.querySelector('#test').classList.remove('hide');
+    carouselInit();
+
+    setWeather(apiData.weather);
     
 });
 
@@ -81,4 +88,27 @@ const postData = async(url="",data={})=>{
          console.log("Error",error);
          return "error";
     }
+}
+
+
+function setWeather(data){
+    let info = filterWeatherDate(data);
+    const icon = info.weather.icon;
+    const img = document.querySelector('.weather_icon');
+    img.src = `https://www.weatherbit.io/static/img/icons/${icon}.png`;
+    const text = setWeatherInfo(info);
+}
+
+function filterWeatherDate(data){
+    return data[0];
+}
+
+function setWeatherInfo(data){
+    const text = ` 
+     <p><strong>Temperature : </strong> ${data.max_temp} , ${data.min_temp} </p>
+     <p><strong>Feels Like : </strong> ${data.app_max_temp} , ${data.app_min_temp} </p>
+     <p><strong>Weather : </strong> ${data.weather.description}</p>
+    `
+
+    document.querySelector('#weather_info').innerHTML = text;
 }

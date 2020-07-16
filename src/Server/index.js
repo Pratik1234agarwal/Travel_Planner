@@ -48,7 +48,8 @@ let apiData = {
   riskScore:"",
   icon:"",
   weather:[],
-  images:[]
+  images:[],
+  countryDetails:{}
 }
 
 
@@ -87,13 +88,33 @@ app.post("/fetch",async function(req,res){
       data4 = await request.json();
     }
     apiData.images = filterImages(data4.hits);
+
+    request = await fetch(`https://restcountries.eu/rest/v2/alpha/${code}`);
+    let data5 = await request.json();
+    apiData.countryDetails = setCountryDetails(data5);
+    
+
     res.send(apiData);
+    
   }catch(error){
     console.log("Error",error);
   }
    
 
 });
+
+
+function setCountryDetails(data5){
+    countryDetails = {};
+    countryDetails.currency = data5.currencies[0];
+    countryDetails.population = data5.population;
+    countryDetails.capital = data5.capital;
+    countryDetails.callingCode = data5.callingCodes[0];
+    countryDetails.languages = data5.languages[0];
+    countryDetails.flag = data5.flag;
+
+    return countryDetails;
+}
 
 
 /* This filters the pixibay api result */

@@ -63,10 +63,8 @@ button.addEventListener('click',async()=>{
     console.log(apiData);
     setImages(apiData.images);
     const text = document.querySelector("#trip_destination");
+    document.querySelector("#countryInfoTitle").innerHTML = `About ${apiData.countryName}`;
     text.innerHTML = `Trip to ${apiData.cityName},${apiData.countryName}`;
-    const risk = document.querySelector('#risk-score');
-    risk.innerHTML = `Risk Score : ${apiData.riskScore} / 5`;
-
     document.querySelector('#test').classList.remove('hide');
     modal.open();
     carouselInit();
@@ -75,6 +73,7 @@ button.addEventListener('click',async()=>{
     const days = setDaysLeft(date.value);
     const day_left = document.querySelector('.days_left');
     day_left.innerHTML = `No. of days Left : ${days}`;
+    setCountryDetails(apiData.countryDetails,apiData.riskScore);
     button.innerHTML = "Submit";
     }
     
@@ -86,6 +85,20 @@ function setImages(images){
         const carousel = document.querySelectorAll('.carousel-item');
         carousel[i].querySelector('img').src = images[i];
     }
+}
+
+
+function setCountryDetails(data,riskScore){
+    document.querySelector('#countryInfoImage').src = data.flag;
+    const text = `
+        <p><strong>Population: </strong>${data.population}</p>
+        <p><strong>CallingCode: </strong>+${data.callingCode}</p>
+        <p><strong>Capital: </strong>${data.capital}</p>
+        <p><strong>Currency : </strong>${data.currency.code} , ${data.currency.symbol}</p>
+        <p><strong>Risk Score: </strong>${riskScore} / 5</p>
+        <p><strong>Language: </strong>${data.languages.name}</p>
+    `;
+    document.querySelector("#countryInfo").innerHTML = text;
 }
 
 

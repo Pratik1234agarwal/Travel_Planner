@@ -6,12 +6,6 @@ import Resort2 from './img/resort2.jpg';
 import Resort3 from './img/resort3.jpg';
 import html from './views/index.html';
 
-//post the server uses
-let port = process.env.PORT;
-if (port == null || port == "") {
-  port = 8000;
-}
-
 
 //sidenav 
 

@@ -22,11 +22,13 @@ M.Slider.init(sidenav,{
 
 // Modal 
 
-const modal = document.querySelectorAll('.modal');
-M.Modal.init(modal,{
+const modal1 = document.querySelector('.modal');
+M.Modal.init(modal1,{
     dismissible:false,
     //onOpenEnd : carouselInit
 });
+
+const modal = M.Modal.getInstance(modal1);
 
 // Datepicker 
 
@@ -55,6 +57,7 @@ button.addEventListener('click',async()=>{
     }
     else{
     //const input = document.querySelector('input');
+    button.innerHTML = "Fetching .. "
     const data = {city:city.value};
     const apiData = await postData("http://localhost:8000/fetch",data);
     console.log(apiData);
@@ -65,13 +68,14 @@ button.addEventListener('click',async()=>{
     risk.innerHTML = `Risk Score : ${apiData.riskScore} / 5`;
 
     document.querySelector('#test').classList.remove('hide');
+    modal.open();
     carouselInit();
 
     setWeather(apiData.weather);
     const days = setDaysLeft(date.value);
-    console.log(days);
     const day_left = document.querySelector('.days_left');
     day_left.innerHTML = `No. of days Left : ${days}`;
+    button.innerHTML = "Submit";
     }
     
 });

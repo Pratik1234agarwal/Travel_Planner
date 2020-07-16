@@ -5,7 +5,11 @@ import Resort1 from './img/resort1.jpg';
 import Resort2 from './img/resort2.jpg';
 import Resort3 from './img/resort3.jpg';
 import html from './views/index.html';
+import {setDaysLeft} from './js/helper';
 
+
+const date = document.querySelector('.datepicker');
+const city = document.querySelector('input');
 
 //sidenav 
 
@@ -31,6 +35,7 @@ M.Datepicker.init(picker,{
     autoclose:true,
     showClearBtn:true,
     minDate:new Date(),
+    format:'mm/dd/yyyy'
 });
 
 
@@ -45,9 +50,13 @@ function carouselInit(){
 
 const button = document.querySelector(".btn");
 button.addEventListener('click',async()=>{
-    const input = document.querySelector('input');
-    const data = {city:input.value};
-    const apiData = await postData("/fetch",data);
+    if(city.value ==="" || date.value===""){
+        alert("Please fill all the details");
+    }
+    else{
+    //const input = document.querySelector('input');
+    const data = {city:city.value};
+    const apiData = await postData("http://localhost:8000/fetch",data);
     console.log(apiData);
     setImages(apiData.images);
     const text = document.querySelector("#trip_destination");
@@ -59,8 +68,14 @@ button.addEventListener('click',async()=>{
     carouselInit();
 
     setWeather(apiData.weather);
+    const days = setDaysLeft(date.value);
+    console.log(days);
+    const day_left = document.querySelector('.days_left');
+    day_left.innerHTML = `No. of days Left : ${days}`;
+    }
     
 });
+
 
 function setImages(images){
     for(let i=0;i<4;i++){

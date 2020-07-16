@@ -59,7 +59,7 @@ button.addEventListener('click',async()=>{
     //const input = document.querySelector('input');
     button.innerHTML = "Fetching .. "
     const data = {city:city.value};
-    const apiData = await postData("http://localhost:8000/fetch",data);
+    const apiData = await postData("/fetch",data);
     console.log(apiData);
     setImages(apiData.images);
     const text = document.querySelector("#trip_destination");

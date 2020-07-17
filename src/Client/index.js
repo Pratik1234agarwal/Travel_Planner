@@ -68,18 +68,23 @@ button.addEventListener("click", async () => {
   } else {
     button.innerHTML = "Fetching .. ";
     const data = { city: city.value };
-    const apiData = await postData("http://localhost:8000/fetch", data);
-    //const apiData = await postData("/fetch",data);
-    console.log(apiData);
+        try{
+        const apiData = await postData("http://localhost:8000/fetch", data);
+        //const apiData = await postData("/fetch",data);
+        console.log(apiData);
 
-    //This renders and prepares the content of the modal
-    setModal(apiData, date);
-    modal.open();
-    if (flag === 0) {
-      carouselInit();
+        //This renders and prepares the content of the modal
+        setModal(apiData, date);
+        modal.open();
+        if (flag === 0) {
+        carouselInit();
+        }
+        flag = 1;
+        button.innerHTML = "Submit";
+    }catch(error){
+        alert("Unable to process your request , Please check your internet connection and refresh again");
+        button.innerHTML = "Submit";
     }
-    flag = 1;
-    button.innerHTML = "Submit";
   }
 });
 
@@ -94,75 +99,12 @@ function generatePDF() {
   const modal = document.querySelector("#modal-content1");
   var opt = {
     filename: `document.pdf`,
-    image: { type: "jpg", quality: 0.98 },
+    image: { type: "jpg", quality: 0.9 },
     html2canvas: { scale: 1, useCORS: true },
     jsPDF: { unit: "mm", format: "letter", orientation: "portrait" },
   };
   html2pdf().set(opt).from(modal).save();
 }
-
-/*function setImages(images) {
-  for (let i = 0; i < 4; i++) {
-    const carousel = document.querySelectorAll(".carousel-item");
-    carousel[i].querySelector("img").src = images[i];
-  }
-}
-
-function setCountryDetails(data, riskScore) {
-  document.querySelector("#countryInfoImage").src = data.flag;
-  const text = `
-        <p><strong>Population: </strong>${data.population}</p>
-        <p><strong>CallingCode: </strong>+${data.callingCode}</p>
-        <p><strong>Capital: </strong>${data.capital}</p>
-        <p><strong>Currency : </strong>${data.currency.code} , ${data.currency.symbol}</p>
-        <p><strong>Risk Score: </strong>${riskScore} / 5</p>
-        <p><strong>Language: </strong>${data.languages.name}</p>
-    `;
-  document.querySelector("#countryInfo").innerHTML = text;
-}
-
-const postData = async (url = "", data = {}) => {
-  const response = await fetch(url, {
-    method: "POST",
-    credentials: "same-origin",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-  console.log(response);
-
-  try {
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.log("Error", error);
-    return "error";
-  }
-};
-
-function setWeather(data) {
-  let info = filterWeatherDate(data);
-  const icon = info.weather.icon;
-  const img = document.querySelector(".weather_icon");
-  img.src = `https://www.weatherbit.io/static/img/icons/${icon}.png`;
-  setWeatherInfo(info);
-}
-
-function filterWeatherDate(data) {
-  return data[0];
-}
-
-function setWeatherInfo(data) {
-  const text = ` 
-     <p><strong>Temperature : </strong> ${data.max_temp} , ${data.min_temp} </p>
-     <p><strong>Feels Like : </strong> ${data.app_max_temp} , ${data.app_min_temp} </p>
-     <p><strong>Weather : </strong> ${data.weather.description}</p>
-    `;
-
-  document.querySelector("#weather_info").innerHTML = text;
-}
-*/
 
 export { 
     setDaysLeft,

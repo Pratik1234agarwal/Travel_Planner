@@ -20,10 +20,15 @@ div.modal-content{
 
 @media(max-width:600px){
 .carousel{
-    height:200px;
+    height:200px !important;
 }
 }
 
+/*@media(min-width:900px){
+    .carousel{
+        height:40vh !important;
+    }
+}*/
 
 .flag{
     border: 1px solid rgba(0,0,0,0.2);

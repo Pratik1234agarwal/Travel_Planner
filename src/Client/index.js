@@ -45,6 +45,8 @@ M.Datepicker.init(picker,{
 });
 
 
+//Carousel
+
 function carouselInit(){
     const carousel = document.querySelector('.carousel');
     M.Carousel.init(carousel,{
@@ -53,6 +55,11 @@ function carouselInit(){
     });
 }
 
+
+// Tabs
+
+const tabs = document.querySelector(".tabs");
+M.Tabs.init(tabs,{});
 
 const button = document.querySelector(".btn");
 button.addEventListener('click',async()=>{

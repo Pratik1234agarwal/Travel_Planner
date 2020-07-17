@@ -1,10 +1,11 @@
-import fetch from "node-fetch";
+//import fetch from "node-fetch";
 
 
 function setDaysLeft(data){
     const date = new Date(data);
     const current = new Date();
-    const diff = date.getTime() - current.getTime();
+    const curDate = new Date(current.getFullYear(),current.getMonth(),current.getDate());
+    const diff = date.getTime() - curDate.getTime();
     let days = diff / (1000*24*3600);
     days = Math.round(days);
     return days;

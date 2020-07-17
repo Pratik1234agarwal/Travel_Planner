@@ -17,7 +17,6 @@
           <div class="nav-wrapper">
             <a href="#" class="brand-logo">Travielle</a>
           </div>
-
         </div>
       </nav>
     </div>
@@ -66,7 +65,7 @@
       <div class="container">
         <div class="row">
           <div class="col s12">
-            <h3 class='white-text'>Search Destination</h3>
+            <h3 class="white-text">Search Destination</h3>
             <div class="input-field">
               <input
                 type="text"
@@ -74,7 +73,11 @@
                 id="autocomplete-input"
                 placeholder="London,Mumbai"
               />
-              <input type="text" class="datepicker white" placeholder="Jul 24,2020">
+              <input
+                type="text"
+                class="datepicker white"
+                placeholder="Jul 24,2020"
+              />
               <!-- <input type='submit' href="#modal1" class="btn waves-effect blue darken-4 black-text modal-trigger" value="Submit"> -->
               <button class="btn blue darken-4">SUBMIT</button>
             </div>
@@ -86,56 +89,66 @@
     <!-- section Tab -->
     <div class="row">
       <div class="col s12">
-          <ul class="tabs">
-            <li class="tab col s6"><a href="#trip" class='active'>Trips</a></li>
-            <li class="tab col s6"><a href="#past-trip">Past Trips</a></li>
-          </ul>
+        <ul class="tabs">
+          <li class="tab col s6"><a href="#trip" class="active">Trips</a></li>
+          <li class="tab col s6"><a href="#past-trip">Past Trips</a></li>
+        </ul>
       </div>
       <div id="trip">
         <div class="container center" id="trips">
-            <div class="row" id="trips_row">
-              <div class="col s12 m6 l4" data-city="jamshedpur">
-                <div class="card hoverable">
-                  <div class="card-image">
-                    <img src="../img/resort1.jpg" alt="image" class="responsive-img">
-                  </div>
-                  <div class="card-content">
-                    <h5>Jamshedpur,India</h5>
-                    <h6>13 Days to go</h6>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <!--This is filled by javascipt-->
         </div>
-    </div>
-      <div id="past-trip"><h3 class='center'>Nothing to display here</h3></div>
+      </div>
+      <div id="past-trip">
+        <div class="container center" id="past-trips">
+
+        </div>
+      </div>
     </div>
 
     <!--section : Modal Displays the imformation about the Trip-->
-    <div id="modal1" class="modal" >
+    <div id="modal1" class="modal">
       <div class="modal-content" id="modal-content1">
         <div class="row center" id="test">
           <div class="col s12" id="carousel">
             <div class="carousel carousel-slider">
-              <a class="carousel-item" href="#one!"><img class="responsive-img" src="https://lorempixel.com/800/400/city/1"></a>
-              <a class="carousel-item" href="#two!"><img class="responsive-img" src="https://lorempixel.com/800/400/city/2"></a>
-              <a class="carousel-item" href="#three!"><img class="responsive-img" src="https://lorempixel.com/800/400/city/3"></a>
-              <a class="carousel-item" href="#four!"><img class="responsive-img" src="https://lorempixel.com/800/400/city/4"></a>
+              <a class="carousel-item" href="#one!"
+                ><img
+                  class="responsive-img"
+                  src="https://lorempixel.com/800/400/city/1"
+              /></a>
+              <a class="carousel-item" href="#two!"
+                ><img
+                  class="responsive-img"
+                  src="https://lorempixel.com/800/400/city/2"
+              /></a>
+              <a class="carousel-item" href="#three!"
+                ><img
+                  class="responsive-img"
+                  src="https://lorempixel.com/800/400/city/3"
+              /></a>
+              <a class="carousel-item" href="#four!"
+                ><img
+                  class="responsive-img"
+                  src="https://lorempixel.com/800/400/city/4"
+              /></a>
             </div>
           </div>
           <div class="col s12 center">
-            <h4 id='trip_destination'>Trip to </h4>
+            <h4 id="trip_destination">Trip to</h4>
           </div>
           <div class="col s12 m6 l6">
             <div class="card white darken-2">
               <div class="card-content">
                 <div class="row">
                   <div class="col s12">
-                    <img src="../img/resort1.jpg" alt="Weather icon" class='responsive-img weather_icon'>
+                    <img
+                      src="../img/resort1.jpg"
+                      alt="Weather icon"
+                      class="responsive-img weather_icon"
+                    />
                   </div>
-                  <div class="col s12" id='weather_info'>
-                    
-                  </div>
+                  <div class="col s12" id="weather_info"></div>
                 </div>
               </div>
             </div>
@@ -143,20 +156,35 @@
           <div class="col s12 m6 l6">
             <div class="card white darken-2">
               <div class="card-content">
-                <span class="card-title" id="countryInfoTitle">About India</span>
-                <img src="../img/resort1.jpg" class="responsive-img flag" alt="Country's Flag" id="countryInfoImage">
+                <span class="card-title" id="countryInfoTitle"
+                  >About India</span
+                >
+                <img
+                  src="../img/resort1.jpg"
+                  class="responsive-img flag"
+                  alt="Country's Flag"
+                  id="countryInfoImage"
+                />
                 <div id="countryInfo"></div>
               </div>
             </div>
           </div>
-          <div class="col s12 center"><h5 class='days_left'>No of Days left : 5days</h5></div>
+          <div class="col s12 center">
+            <h5 class="days_left">No of Days left : 5days</h5>
+          </div>
         </div>
       </div>
       <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
-        <btn class="waves-effect waves-green btn-flat" id="print">Print</a>
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat"
+          >Close</a
+        >
+        <button class="waves-effect waves-green btn-flat" id="print">
+          Print
+        </button>
+        <button class="waves-effect waves-green btn-flat" id="save">
+          Save
+        </button>
       </div>
-    </div> 
-            
+    </div>
   </body>
 </html>

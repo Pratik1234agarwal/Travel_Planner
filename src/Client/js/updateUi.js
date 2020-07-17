@@ -1,6 +1,7 @@
 
 
 function setModal(apiData,date){
+
     setImages(apiData.images);
     const text = document.querySelector("#trip_destination");
     document.querySelector("#countryInfoTitle").innerHTML = `About ${apiData.countryName}`;
@@ -10,6 +11,7 @@ function setModal(apiData,date){
     const day_left = document.querySelector('.days_left');
     day_left.innerHTML = `No. of days Left : ${days}`;
     setCountryDetails(apiData.countryDetails,apiData.riskScore);
+    
 }
 
 function setImages(images){

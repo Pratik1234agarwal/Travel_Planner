@@ -10,6 +10,8 @@ import { setModal } from "./js/updateUi";
 import {initialize,carouselInit} from "./js/init";
 
 
+
+
 // Intializing the Components of materialize
 initialize();
 
@@ -31,6 +33,7 @@ const html2pdf = require("html2pdf.js");
 const date = document.querySelector(".datepicker");
 const city = document.querySelector("input");
 
+let apiData = {};
 
 
 // Form Button Click Event Listener
@@ -44,7 +47,8 @@ button.addEventListener("click", async () => {
     const data = { city: city.value };
     try {
 
-      const apiData = await postData("http://localhost:8000/fetch", data);
+      apiData = await postData("http://localhost:8000/fetch", data);
+      apiData.date = date.value
       //const apiData = await postData("/fetch",data);
       console.log(apiData);
 
@@ -90,4 +94,89 @@ function generatePDF() {
 
 //exporting the function to be used globally
 
-export { setDaysLeft, postData, modal };
+export { setModal,setDaysLeft, postData, modal,carouselInit };
+
+
+
+// Adding LocalStorage to the app 
+let trips = []
+
+
+if(localStorage.getItem('trips')){
+  trips = JSON.parse(localStorage.getItem('trips'))
+}
+
+formCard();
+
+const save = document.querySelector("#save");
+save.addEventListener('click',()=>{
+    trips.push(apiData);
+    localStorage.setItem("trips",JSON.stringify(trips));
+    alert("This trip has been saved ");
+    formCard();
+
+});
+
+
+function formCard(){
+  const tripRow = document.querySelector('#trips');
+  const tripPast = document.querySelector("#past-trips");
+  console.log(trips)
+  tripRow.innerHTML ="";
+  const card = document.createElement("div");
+  card.classList.add('row');
+  const cardPast = document.createElement("div");
+  cardPast.classList.add('row');
+  trips.sort(compareDates);
+  
+  for(let i=0;i<trips.length;i++){
+      
+     if(i%2==0){
+       trips[i].date = "06/25/2020";
+     }
+      const dayLeft = setDaysLeft(trips[i].date);
+      if(dayLeft>=0){
+      card.innerHTML +=cardHtml(trips[i],dayLeft);
+      }else{
+
+        cardPast.innerHTML +=cardHtml(trips[i],dayLeft);
+      }
+      
+
+  }
+  tripRow.appendChild(card);
+  tripPast.appendChild(cardPast);
+}
+
+
+function cardHtml(apiData,dayLeft){
+  let horizontal = "";
+  if(window.innerWidth > 600){
+    horizontal = "horizontal";
+  }
+  let dayText = "to go";
+  if(dayLeft<0){
+    dayText = "earlier";
+    dayLeft = Math.abs(dayLeft);
+  }
+  const innerHTML = `<div class="col s12 medium" data-city="${apiData.cityName}">
+      <div class="card hoverable ${horizontal}">
+        <div class="card-image">
+          <img src="${apiData.images[0]}" alt="image" class="responsive-img">
+        </div>
+        <div class="card-content center">
+          <h5 class='flow-text'>${apiData.cityName},${apiData.countryName}</h5>
+          <h6>${dayLeft} Days ${dayText}</h6>
+        </div>
+      </div>
+    </div>`;
+  return innerHTML;
+}
+
+
+function compareDates(data1,data2){
+  let date1 = new Date(data1.date);
+  let date2 = new Date(data2.date);
+  return(date1.getTime()-date2.getTime());
+}
+

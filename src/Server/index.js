@@ -4,6 +4,9 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const fetch = require('node-fetch');
 
+const dotenv = require('dotenv');
+dotenv.config();
+
 
 let port = process.env.PORT;
 if (port == null || port == "") {
@@ -60,7 +63,7 @@ app.post("/fetch",async function(req,res){
   apiData.cityName = city;
   console.log("Request Received for city :: "+city);
   try{
-    let request = await fetch(`http://api.geonames.org/searchJSON?q=${city}&maxRows=1&username=pratik1234`);
+    let request = await fetch(`http://api.geonames.org/searchJSON?q=${city}&maxRows=1&username=${process.env.KEY_GEONAMES}`);
     let data1 = await request.json();
     let lat = data1.geonames[0].lat;
     let long = data1.geonames[0].lng;
@@ -68,7 +71,7 @@ app.post("/fetch",async function(req,res){
     apiData.long = long;
     apiData.countryName = data1.geonames[0].countryName;
 
-    request = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?lat=${lat}&lon=${long}&key=3a99b9cff7aa4272b947cbe2b8a19c49`);
+    request = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?lat=${lat}&lon=${long}&key=${process.env.KEY_WEATHERBIT}`);
     let data2 = await request.json();
     apiData.weather = filterWeather(data2.data);
 
@@ -80,11 +83,10 @@ app.post("/fetch",async function(req,res){
     apiData.risk = data3.data[code];
     apiData.riskScore = data3.data[code].advisory.score;
 
-    request = await fetch(`https://pixabay.com/api/?key=17428921-ea413266bbb7930b9bf8a2446&q=${city}&category=travel`);
+    request = await fetch(`https://pixabay.com/api/?key=${process.env.KEY_PIXABAY}&q=${city}&category=travel`);
     let data4 = await request.json();
-    console.log(data4.hits.length);
     if(data4.hits.length === 0){
-      request = await fetch(`https://pixabay.com/api/?key=17428921-ea413266bbb7930b9bf8a2446&q=${apiData.countryName}&category=travel`);
+      request = await fetch(`https://pixabay.com/api/?key=${process.env.KEY_PIXABAY}&q=${apiData.countryName}&category=travel`);
       data4 = await request.json();
     }
     apiData.images = filterImages(data4.hits);

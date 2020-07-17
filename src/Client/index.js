@@ -8,6 +8,9 @@ import html from './views/index.html';
 import {setDaysLeft} from './js/helper';
 
 
+const html2pdf = require('html2pdf.js');
+
+
 const date = document.querySelector('.datepicker');
 const city = document.querySelector('input');
 
@@ -59,14 +62,14 @@ button.addEventListener('click',async()=>{
     //const input = document.querySelector('input');
     button.innerHTML = "Fetching .. "
     const data = {city:city.value};
-    //const apiData = await postData("http://localhost:8000/fetch",data);
-    const apiData = await postData("/fetch",data);
+    const apiData = await postData("http://localhost:8000/fetch",data);
+    //const apiData = await postData("/fetch",data);
     console.log(apiData);
     setImages(apiData.images);
     const text = document.querySelector("#trip_destination");
     document.querySelector("#countryInfoTitle").innerHTML = `About ${apiData.countryName}`;
     text.innerHTML = `Trip to ${apiData.cityName},${apiData.countryName}`;
-    document.querySelector('#test').classList.remove('hide');
+    //document.querySelector('#test').classList.remove('hide');
     modal.open();
     carouselInit();
 
@@ -76,9 +79,35 @@ button.addEventListener('click',async()=>{
     day_left.innerHTML = `No. of days Left : ${days}`;
     setCountryDetails(apiData.countryDetails,apiData.riskScore);
     button.innerHTML = "Submit";
+
+    // console.log("Setting a timeout");
+    // setTimeout(generatePDF(),30000);
+
     }
     
 });
+
+
+const print = document.querySelector("#print");
+print.addEventListener('click',generatePDF);
+
+function generatePDF() {
+    console.log("generating pdf");
+    // Choose the element that our invoice is rendered in.
+    //const element = document.getElementById(".modal");
+    // Choose the element and save the PDF for our user.
+    const modal = document.querySelector('#modal-content1');
+    var opt = {
+        filename:     `document.pdf`,
+        image:        { type: 'jpg', quality: 0.98 },
+        html2canvas:  { scale: 2, useCORS: true },
+        jsPDF:        { unit: 'mm', format: 'letter', orientation: 'portrait' }
+    };
+    html2pdf()
+      .set(opt)
+      .from(modal)
+      .save();
+}
 
 
 function setImages(images){

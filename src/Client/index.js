@@ -7,6 +7,7 @@ import Resort3 from './img/resort3.jpg';
 import html from './views/index.html';
 import {setDaysLeft} from './js/helper';
 
+let flag = 0;
 
 const html2pdf = require('html2pdf.js');
 
@@ -71,7 +72,10 @@ button.addEventListener('click',async()=>{
     text.innerHTML = `Trip to ${apiData.cityName},${apiData.countryName}`;
     //document.querySelector('#test').classList.remove('hide');
     modal.open();
+    if(flag===0){
     carouselInit();
+    }
+    flag=1;
 
     setWeather(apiData.weather);
     const days = setDaysLeft(date.value);
@@ -100,7 +104,7 @@ function generatePDF() {
     var opt = {
         filename:     `document.pdf`,
         image:        { type: 'jpg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true },
+        html2canvas:  { scale: 1, useCORS: true },
         jsPDF:        { unit: 'mm', format: 'letter', orientation: 'portrait' }
     };
     html2pdf()

@@ -53,8 +53,8 @@ button.addEventListener("click", async () => {
     try {
 
       apiData = await postData("http://localhost:8000/fetch", data);
+      //apiData = await postData("/fetch",data);
       apiData.date = date.value
-      //const apiData = await postData("/fetch",data);
       console.log(apiData);
 
       //This renders and prepares the content of the modal

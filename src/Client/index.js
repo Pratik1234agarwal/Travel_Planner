@@ -4,6 +4,7 @@ import "./styles/main.scss";
 import Resort1 from "./img/resort1.jpg";
 import Resort2 from "./img/resort2.jpg";
 import Resort3 from "./img/resort3.jpg";
+import Icon from "./img/icon.png";
 import html from "./views/index.html";
 import { setDaysLeft, postData } from "./js/helper";
 import { setModal } from "./js/updateUi";

@@ -8,11 +8,15 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;1,400;1,700&family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <!-- Section : Navbar -->
     <div class="navbar-fixed">
-      <nav class="deep-purple accent-3">
+      <nav class="deep-purple accent-2">
         <div class="container">
           <div class="nav-wrapper">
             <a href="#" class="brand-logo">Travielle</a>
@@ -29,28 +33,27 @@
           <div class="caption center-align">
             <h2>Take Your Dream Vacation</h2>
             <h5 class="light grey-text text-lighten-3 hide-on-small-only">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim
-              veritatis, praesentium corporis rerum adipisci vero?
+              Travel to the palces you always wanted to .
             </h5>
           </div>
         </li>
         <li>
           <img src="../img/resort2.jpg" />
           <div class="caption left-align">
-            <h2>We Work with All Budgets</h2>
+            <h2>Save and Manage your Trips</h2>
             <h5 class="light grey-text text-lighten-3 hide-on-small-only">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam ad
-              sunt facere, molestias at impedit!
+              You can save the trips and view them later , or even take a pdf
+              version to print
             </h5>
           </div>
         </li>
         <li>
           <img src="../img/resort3.jpg" />
           <div class="caption right-align">
-            <h2>Group & Individual Getaways</h2>
+            <h2>Get Important Imformation</h2>
             <h5 class="light grey-text text-lighten-3 hide-on-small-only">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat
-              repellendus repudiandae enim quaerat assumenda dicta.
+              Get imformation of the country being visited and weather details
+              of your trip
             </h5>
           </div>
         </li>
@@ -100,11 +103,15 @@
         </div>
       </div>
       <div id="past-trip">
-        <div class="container center" id="past-trips">
-
-        </div>
+        <div class="container center" id="past-trips"></div>
       </div>
     </div>
+
+    <!--section : Footer-->
+    <footer class="section deep-purple accent-2 white-text center">
+      <p class="flow-text">Travielle &copy; 2020</p>
+      <p class="flow-text">Made by Pratik Agarwal</p>
+    </footer>
 
     <!--section : Modal Displays the imformation about the Trip-->
     <div id="modal1" class="modal">
@@ -175,16 +182,18 @@
         </div>
       </div>
       <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat deep-purple accent-3"
+        <a
+          href="#!"
+          class="modal-close waves-effect waves-green btn deep-purple accent-3"
           >Close</a
         >
-        <button class="waves-effect waves-green btn-flat" id="print">
+        <button class="waves-effect waves-green btn" id="print">
           Print
         </button>
-        <button class="waves-effect waves-green btn-flat green" id="save">
+        <button class="waves-effect waves-green btn green" id="save">
           Save
         </button>
-        <button class="waves-effect waves-green btn-flat red" id="delete">
+        <button class="waves-effect waves-green btn red" id="delete">
           Delete
         </button>
       </div>

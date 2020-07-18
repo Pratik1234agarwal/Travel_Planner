@@ -12,6 +12,13 @@ import {initialize,carouselInit} from "./js/init";
 
 
 
+const del = document.querySelector("#delete");
+
+// This stores the index corresponsing to the Trip which is being viewed
+// from the saved trips
+let indexModal = -1;
+
+
 // Intializing the Components of materialize
 initialize();
 
@@ -52,6 +59,7 @@ button.addEventListener("click", async () => {
 
       //This renders and prepares the content of the modal
       save.classList.remove('hide');
+      del.classList.add('hide');
       setModal(apiData);
       modal.open();
       carouselInit();
@@ -176,6 +184,7 @@ function cardHtml(apiData,dayLeft,index){
 
 function click(event){
   const data_index = trips[this.dataset.index];
+  indexModal = this.dataset.index;
   toggleModal(data_index);
 }
 
@@ -185,6 +194,7 @@ function toggleModal(data_index){
   carouselInit();
 
   save.classList.add('hide');
+  del.classList.remove('hide');
 
 
 }
@@ -202,4 +212,14 @@ function compareDates(data1,data2){
   let date2 = new Date(data2.date);
   return(date1.getTime()-date2.getTime());
 }
+
+
+del.addEventListener('click',()=>{
+  trips.splice(indexModal,1);
+  if(confirm("Are you sure you want to delete the trip ")){
+    localStorage.setItem('trips',JSON.stringify(trips));
+    formCard();
+    modal.close();
+  }
+});
 

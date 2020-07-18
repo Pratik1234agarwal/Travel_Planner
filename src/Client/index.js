@@ -132,6 +132,7 @@ function formCard(){
   const tripPast = document.querySelector("#past-trips");
   console.log(trips)
   tripRow.innerHTML ="";
+  tripPast.innerHTML = "";
   const card = document.createElement("div");
   card.classList.add('row');
   const cardPast = document.createElement("div");
@@ -152,6 +153,15 @@ function formCard(){
   }
   addListener(card);
   addListener(cardPast);
+    if(card.innerHTML ===""){
+      console.log("true")
+      card.innerHTML = "<h4> Nothing to show here </h4>"
+      card.classList.add('nothing');
+    }
+    if(cardPast.innerHTML ===""){
+      cardPast.innerHTML = "<h4> Nothing to show here </h4>"
+      cardPast.classList.add('nothing');
+    }
   tripRow.appendChild(card);
   tripPast.appendChild(cardPast);
 }

@@ -1,21 +1,26 @@
 
 
-function setModal(apiData,date){
+function setModal(apiData){
 
     setImages(apiData.images);
     const text = document.querySelector("#trip_destination");
     document.querySelector("#countryInfoTitle").innerHTML = `About ${apiData.countryName}`;
     text.innerHTML = `Trip to ${apiData.cityName},${apiData.countryName}`;
     setWeather(apiData.weather);
-    const days = Client.setDaysLeft(date.value);
+    const days = Client.setDaysLeft(apiData.date);
     const day_left = document.querySelector('.days_left');
-    day_left.innerHTML = `No. of days Left : ${days}`;
+    let dayText = `${days} days to go`;
+    if(days<0){
+        dayText = `${Math.abs(days)} days earlier`;
+    }
+    day_left.innerHTML = dayText;
     setCountryDetails(apiData.countryDetails,apiData.riskScore);
     
 }
 
 function setImages(images){
-    for(let i=0;i<4;i++){
+
+    for(let i=0;i<4 && i<images.length;i++){
         const carousel = document.querySelectorAll('.carousel-item');
         carousel[i].querySelector('img').src = images[i];
     }

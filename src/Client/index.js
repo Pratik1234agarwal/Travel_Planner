@@ -25,8 +25,6 @@ M.Modal.init(modal1, {
 
 const modal = M.Modal.getInstance(modal1);
 
-console.log(setModal);
-let flag = 0;
 
 const html2pdf = require("html2pdf.js");
 
@@ -53,12 +51,11 @@ button.addEventListener("click", async () => {
       console.log(apiData);
 
       //This renders and prepares the content of the modal
-      setModal(apiData, date);
+      save.classList.remove('hide');
+      setModal(apiData);
       modal.open();
-      if (flag === 0) {
-        carouselInit();
-      }
-      flag = 1;
+      carouselInit();
+      setTimeout(carouselInit,1000);
       button.innerHTML = "Submit";
     } catch (error) {
       console.log(error);
@@ -98,7 +95,10 @@ export { setModal,setDaysLeft, postData, modal,carouselInit };
 
 
 
+
 // Adding LocalStorage to the app 
+
+
 let trips = []
 
 
@@ -109,6 +109,7 @@ if(localStorage.getItem('trips')){
 formCard();
 
 const save = document.querySelector("#save");
+
 save.addEventListener('click',()=>{
     trips.push(apiData);
     localStorage.setItem("trips",JSON.stringify(trips));
@@ -130,10 +131,7 @@ function formCard(){
   trips.sort(compareDates);
   
   for(let i=0;i<trips.length;i++){
-      
-     if(i%2==0){
-       trips[i].date = "06/25/2020";
-     }
+
       const dayLeft = setDaysLeft(trips[i].date);
       if(dayLeft>=0){
       card.innerHTML +=cardHtml(trips[i],dayLeft,i);
@@ -144,6 +142,8 @@ function formCard(){
       
 
   }
+  addListener(card);
+  addListener(cardPast);
   tripRow.appendChild(card);
   tripPast.appendChild(cardPast);
 }
@@ -171,6 +171,29 @@ function cardHtml(apiData,dayLeft,index){
       </div>
     </div>`;
   return innerHTML;
+}
+
+
+function click(event){
+  const data_index = trips[this.dataset.index];
+  toggleModal(data_index);
+}
+
+function toggleModal(data_index){
+  setModal(data_index);
+  modal.open();
+  carouselInit();
+
+  save.classList.add('hide');
+
+
+}
+
+function addListener(row){
+    const cards = row.children;
+    for(let i=0;i<cards.length;i++){
+      cards[i].addEventListener('click',click);
+    }
 }
 
 

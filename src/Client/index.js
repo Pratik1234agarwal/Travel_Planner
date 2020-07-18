@@ -136,10 +136,10 @@ function formCard(){
      }
       const dayLeft = setDaysLeft(trips[i].date);
       if(dayLeft>=0){
-      card.innerHTML +=cardHtml(trips[i],dayLeft);
+      card.innerHTML +=cardHtml(trips[i],dayLeft,i);
       }else{
 
-        cardPast.innerHTML +=cardHtml(trips[i],dayLeft);
+        cardPast.innerHTML +=cardHtml(trips[i],dayLeft,i);
       }
       
 
@@ -149,7 +149,7 @@ function formCard(){
 }
 
 
-function cardHtml(apiData,dayLeft){
+function cardHtml(apiData,dayLeft,index){
   let horizontal = "";
   if(window.innerWidth > 600){
     horizontal = "horizontal";
@@ -159,7 +159,7 @@ function cardHtml(apiData,dayLeft){
     dayText = "earlier";
     dayLeft = Math.abs(dayLeft);
   }
-  const innerHTML = `<div class="col s12 medium" data-city="${apiData.cityName}">
+  const innerHTML = `<div class="col s12 medium" data-city="${apiData.cityName}" data-index="${index}">
       <div class="card hoverable ${horizontal}">
         <div class="card-image">
           <img src="${apiData.images[0]}" alt="image" class="responsive-img">

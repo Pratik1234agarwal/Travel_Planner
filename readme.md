@@ -6,7 +6,30 @@ You can also export it unto a pdf to get it printed .
 You can use the website here : 
 [Traville](http://plantheway.herokuapp.com/)
 
-If you want to run the app locally refer to the guide below
+
+## Technology used :-
+
+1. The website uses Materialize.css for styling and layout .
+2. It uses vanilla Javascript , HTML and sass .
+3. The website uses **Local Storage** to store the trips as per the user wants.
+4. The website uses html2pdf to genereate the pdf for the trip .
+5. The website uses service worker for offline functionality.
+6. The website uses **webpack** as a bundler .
+7. The website uses a Express server . 
+8. The api used are :-
+
+    1. Geonames Api - this pulls the data of the city being visited 
+    2. WeatherBit Api - this gives the weather details of the city
+    3. Pixabay Api - this provides the images of the place being visited .
+    4. Rest-Countries Api - this provides the imformation about the country being visited . 
+
+9. Icons incorporated into the forecast are provided by WeatherBit api as well
+
+
+
+*If you want to run the app locally refer to the guide below .*
+
+
 
 ## Getting Started
 

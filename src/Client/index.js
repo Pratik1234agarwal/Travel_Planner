@@ -156,12 +156,10 @@ function formCard(){
   addListener(cardPast);
     if(card.innerHTML ===""){
       console.log("true")
-      card.innerHTML = "<h4> Nothing to show here </h4>"
-      card.classList.add('nothing');
+      card.innerHTML = "<h4 style='margin-top:0;' id='nothing'> Nothing to show here </h4>"
     }
     if(cardPast.innerHTML ===""){
-      cardPast.innerHTML = "<h4> Nothing to show here </h4>"
-      cardPast.classList.add('nothing');
+      cardPast.innerHTML = "<h5 style='margin-top:0;' id='nothing'> Nothing to show here </h5>"
     }
   tripRow.appendChild(card);
   tripPast.appendChild(cardPast);

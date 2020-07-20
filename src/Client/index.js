@@ -156,7 +156,7 @@ function formCard(){
   addListener(cardPast);
     if(card.innerHTML ===""){
       console.log("true")
-      card.innerHTML = "<h4 style='margin-top:0;' id='nothing'> Nothing to show here </h4>"
+      card.innerHTML = "<h5 style='margin-top:0;' id='nothing'> Nothing to show here </h5>"
     }
     if(cardPast.innerHTML ===""){
       cardPast.innerHTML = "<h5 style='margin-top:0;' id='nothing'> Nothing to show here </h5>"

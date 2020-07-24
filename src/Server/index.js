@@ -149,3 +149,14 @@ function filterWeather(data){
   }
   return filter;
 }
+
+
+// SSL Verification 
+
+app.get("/.well-known/pki-validation/94B6CDC3A327212846F545DD10C41D88.txt",(rep,res)=>{
+  console.log(__dirname);
+  res.sendFile(path.join(__dirname,"94B6CDC3A327212846F545DD10C41D88.txt"));
+})
+
+console.log(__dirname);
+console.log(path.join(__dirname,"94B6CDC3A327212846F545DD10C41D88.txt"))
